@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  do:
+    build: .
+    volumes:
+      - ./logs/logs.log:/usr/src/app/logs/logs.log
+    environment:
+      BTX_WEBHOOK: 'webhook'
+      TZ: Asia/Yekaterinburg
+    ports:
+      - 8000:8000
