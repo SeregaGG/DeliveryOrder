@@ -144,12 +144,18 @@ class BtxClient:
         requests.post(self.btx_webhook + 'crm.deal.add', json=body)
 
         deal_id = self.get_deal_id(deal_data)
+        self.products_set(deal_id, deal_data)
+        self.contact_add(deal_id, contact_id)
+
+    def products_set(self, deal_id: str, deal_data: Deal):
         new_products = [{'PRODUCT_NAME': x} for x in deal_data.products]
         body = {
             'id': deal_id,
             'rows': new_products
         }
         requests.post(self.btx_webhook + 'crm.deal.productrows.set', json=body)
+
+    def contact_add(self, deal_id: str, contact_id: str):
         body = {
             'id': deal_id,
             'fields': {
