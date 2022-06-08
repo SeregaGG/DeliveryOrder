@@ -15,7 +15,7 @@ class BtxClient:
         # не уверен стоит ли выносить api методы отдельным списком или полями
 
     def create_uf(self):
-        bodies = [
+        user_fields = [
             {
                 'FIELD_NAME': 'DELIVERY_ADDRESS',
                 'USER_TYPE_ID': 'string'
@@ -29,8 +29,8 @@ class BtxClient:
                 'USER_TYPE_ID': 'string'
             }
         ]
-        for body in bodies:
-            requests.post(self.btx_webhook + 'crm.deal.userfield.add', body)
+        for field in user_fields:
+            requests.post(self.btx_webhook + 'crm.deal.userfield.add', field)
 
     def get_contact_id(self, phone: str) -> Union[str, None]:
         body = {
